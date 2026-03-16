@@ -40,7 +40,7 @@ namespace Prueba_DGII.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("NCF")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("RncCedula")
                         .HasColumnType("nvarchar(max)");
@@ -48,6 +48,10 @@ namespace Prueba_DGII.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ContribuyenteId");
+
+                    b.HasIndex("NCF")
+                        .IsUnique()
+                        .HasFilter("[NCF] IS NOT NULL");
 
                     b.ToTable("ComprobantesFiscales");
 
@@ -103,7 +107,7 @@ namespace Prueba_DGII.Migrations
                             ContribuyenteId = 4,
                             Itbis18 = 150.0,
                             Monto = 1200.0,
-                            NCF = "E310000000005",
+                            NCF = "E310000000006",
                             RncCedula = "321892013"
                         });
                 });

@@ -100,7 +100,7 @@ namespace Prueba_DGII.Data
                 {
                     Id = 6,
                     RncCedula = "321892013",
-                    NCF = "E310000000005",
+                    NCF = "E310000000006",
                     Monto = 1200.00,
                     Itbis18 = 150.00,
                     ContribuyenteId = 4

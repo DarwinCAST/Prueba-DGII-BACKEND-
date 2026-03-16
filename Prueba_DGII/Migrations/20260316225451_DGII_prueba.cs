@@ -35,7 +35,7 @@ namespace Prueba_DGII.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RncCedula = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NCF = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NCF = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Monto = table.Column<double>(type: "float", nullable: true),
                     Itbis18 = table.Column<double>(type: "float", nullable: true),
                     ContribuyenteId = table.Column<int>(type: "int", nullable: true)
@@ -71,13 +71,20 @@ namespace Prueba_DGII.Migrations
                     { 3, 2, 90.0, 500.0, "E310000000003", "123456789" },
                     { 4, 2, 100.0, 800.0, "E310000000004", "348392213" },
                     { 5, 3, 120.0, 1000.0, "E310000000005", "374892013" },
-                    { 6, 4, 150.0, 1200.0, "E310000000005", "321892013" }
+                    { 6, 4, 150.0, 1200.0, "E310000000006", "321892013" }
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ComprobantesFiscales_ContribuyenteId",
                 table: "ComprobantesFiscales",
                 column: "ContribuyenteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ComprobantesFiscales_NCF",
+                table: "ComprobantesFiscales",
+                column: "NCF",
+                unique: true,
+                filter: "[NCF] IS NOT NULL");
         }
 
         /// <inheritdoc />
