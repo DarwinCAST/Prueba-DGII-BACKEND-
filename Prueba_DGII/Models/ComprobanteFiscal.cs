@@ -1,5 +1,8 @@
-﻿namespace Prueba_DGII.Models
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace Prueba_DGII.Models
 {
+    [Index(nameof(NCF), IsUnique = true)]
     public class ComprobanteFiscal
     {
         public int? Id { get; set; }

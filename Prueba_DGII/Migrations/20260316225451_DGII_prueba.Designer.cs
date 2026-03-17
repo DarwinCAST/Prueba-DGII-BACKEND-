@@ -12,7 +12,7 @@ using Prueba_DGII.Data;
 namespace Prueba_DGII.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260316195855_DGII_prueba")]
+    [Migration("20260316225451_DGII_prueba")]
     partial class DGII_prueba
     {
         /// <inheritdoc />
@@ -43,7 +43,7 @@ namespace Prueba_DGII.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("NCF")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("RncCedula")
                         .HasColumnType("nvarchar(max)");
@@ -51,6 +51,10 @@ namespace Prueba_DGII.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ContribuyenteId");
+
+                    b.HasIndex("NCF")
+                        .IsUnique()
+                        .HasFilter("[NCF] IS NOT NULL");
 
                     b.ToTable("ComprobantesFiscales");
 
@@ -81,6 +85,33 @@ namespace Prueba_DGII.Migrations
                             Monto = 500.0,
                             NCF = "E310000000003",
                             RncCedula = "123456789"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ContribuyenteId = 2,
+                            Itbis18 = 100.0,
+                            Monto = 800.0,
+                            NCF = "E310000000004",
+                            RncCedula = "348392213"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ContribuyenteId = 3,
+                            Itbis18 = 120.0,
+                            Monto = 1000.0,
+                            NCF = "E310000000005",
+                            RncCedula = "374892013"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ContribuyenteId = 4,
+                            Itbis18 = 150.0,
+                            Monto = 1200.0,
+                            NCF = "E310000000006",
+                            RncCedula = "321892013"
                         });
                 });
 
@@ -123,6 +154,22 @@ namespace Prueba_DGII.Migrations
                             Estatus = "inactivo",
                             Nombre = "FARMACIA TU SALUD",
                             RncCedula = "123456789",
+                            Tipo = "PERSONA JURIDICA"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Estatus = "inactivo",
+                            Nombre = "FERRETERIA EL LIDER",
+                            RncCedula = "374892013",
+                            Tipo = "PERSONA JURIDICA"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Estatus = "inactivo",
+                            Nombre = "MEDICO LA SALUD PRIMERO",
+                            RncCedula = "321892013",
                             Tipo = "PERSONA JURIDICA"
                         });
                 });

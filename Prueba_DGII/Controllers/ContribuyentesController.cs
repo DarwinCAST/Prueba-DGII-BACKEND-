@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Prueba_DGII.Data;
 using Prueba_DGII.DTOs;
+using Prueba_DGII.Models;
 
 namespace Prueba_DGII.Controllers
 {
@@ -125,6 +126,56 @@ namespace Prueba_DGII.Controllers
             };
 
             return Ok(resultado);
+        }
+        /// <summary>
+        /// Crea un nuevo contribuyente
+        /// </summary>
+        /// <remarks>
+        /// Permite registrar un nuevo contribuyente en el sistema.
+        ///
+        /// Ejemplo de solicitud:
+        ///
+        /// POST /api/contribuyentes
+        ///
+        /// ```json
+        /// {
+        ///   "rncCedula": "123456789",
+        ///   "nombre": "SUPERMERCADO CENTRAL",
+        ///   "tipo": "PERSONA JURIDICA",
+        ///   "estatus": "activo"
+        /// }
+        /// ```
+        ///
+        /// </remarks>
+        /// <param name="dto">Datos del contribuyente</param>
+        /// <returns>El contribuyente creado</returns>
+        /// <response code="200">Contribuyente creado correctamente</response>
+        /// <response code="400">Error de validación o RNC duplicado</response>
+        [HttpPost]
+        public async Task<IActionResult> CrearContribuyente([FromBody] CrearContribuyenteDto dto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var existe = await _context.Contribuyentes
+                .AnyAsync(c => c.RncCedula == dto.RncCedula);
+
+            if (existe)
+                return BadRequest("Ya existe un contribuyente con ese RNC/Cédula");
+
+            var contribuyente = new Contribuyente
+            {
+                RncCedula = dto.RncCedula,
+                Nombre = dto.Nombre,
+                Tipo = dto.Tipo,
+                Estatus = dto.Estatus
+            };
+
+            _context.Contribuyentes.Add(contribuyente);
+
+            await _context.SaveChangesAsync();
+
+            return Ok(contribuyente);
         }
     }
 }
