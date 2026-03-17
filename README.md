@@ -77,7 +77,6 @@ cd prueba-dgii-backend
 ## 3️⃣ Restaurar dependencias
 ```text
 dotnet restore
-add-migrations prueba_dgi
 Update-database
 ```
 ## 4️⃣ Ejecutar la aplicación
